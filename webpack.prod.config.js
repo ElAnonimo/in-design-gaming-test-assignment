@@ -50,13 +50,26 @@ module.exports = {
             }
           },
           {
-            loader: 'sass-loader',
+            loader: 'sass-loader'
+          }
+				]
+			},
+      {
+        test: /\.s?css$/,
+        include: path.resolve(__dirname, 'node_modules/bootstrap'),
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
             options: {
               sourceMap: true
             }
+          },
+          {
+            loader: 'sass-loader'
           }
-				]
-			}
+        ]
+      }
 		]
 	},
 	plugins: [

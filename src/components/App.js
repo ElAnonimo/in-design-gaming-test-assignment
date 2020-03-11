@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from '../store/store';
 // import { Container } from 'reactstrap';
 import Landing from './Landing';
-
+import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/style.scss';
 
 const App = () => {

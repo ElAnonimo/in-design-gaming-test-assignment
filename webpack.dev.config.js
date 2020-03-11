@@ -34,6 +34,7 @@ module.exports = {
 			{
 				test: /\.s?css$/,
         // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/29
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -46,13 +47,26 @@ module.exports = {
             }
           },
           {
-            loader: 'sass-loader',
+            loader: 'sass-loader'
+          }
+        ]
+			},
+      {
+        test: /\.s?css$/,
+        include: path.resolve(__dirname, 'node_modules/bootstrap'),
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
             options: {
               sourceMap: true
             }
+          },
+          {
+            loader: 'sass-loader'
           }
         ]
-			}
+      }
 		]
 	},
 	plugins: [

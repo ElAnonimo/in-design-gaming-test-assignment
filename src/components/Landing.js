@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.css';
 import {
   Container,
   Row,
@@ -11,11 +12,12 @@ import {
   CardSubtitle,
   Button
 } from 'reactstrap';
+
 import { getPokemonsStats } from '../actions/pokemonActions';
 
 const Landing = ({ getPokemonsStats, pokemonsStats: { pokemonsStats, loading } }) => {
   useEffect(() => {
-    getPokemonsStats(10);
+    getPokemonsStats(15);
   }, [getPokemonsStats]);
 
   console.log('Landing pokemonsStats:', pokemonsStats);
@@ -34,17 +36,20 @@ const Landing = ({ getPokemonsStats, pokemonsStats: { pokemonsStats, loading } }
           <Row>
             {pokemonsStats && pokemonsStats.length > 0 && pokemonsStats.map(item => {
               // console.log('Landing pokemonsStats item:', item);
-              return <Col md='2' sm='2' key={item.name}>
-                <Card>
-                  <CardImg top width='100%' src={item.pic} alt='Pokemon image' />
-                  <CardBody>
-                    <CardSubtitle>Name: {item.name}</CardSubtitle>
-                    <CardSubtitle>Types:
-                    </CardSubtitle>
-                    <Button>Click for more specs</Button>
-                  </CardBody>
-                </Card>
-              </Col>
+              return (
+                <Col sm='6' md='4' key={item.name} style={{margin: '5px 0'}}>
+                  <Card>
+                    <CardImg top src={item.pic} alt='Pokemon image' />
+                    <CardBody>
+                      <CardSubtitle>Name: {item.name}</CardSubtitle>
+                      <CardSubtitle>
+                        Types: {item.types.map(type => type.type.name).join(', ')}
+                      </CardSubtitle>
+                      <Button>Click for more specs</Button>
+                    </CardBody>
+                  </Card>
+                </Col>
+              )
             })}
           </Row>
         </Container>
